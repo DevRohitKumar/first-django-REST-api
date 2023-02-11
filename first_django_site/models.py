@@ -7,3 +7,6 @@ class User(models.Model):
     password = models.CharField(max_length=56, blank=False)
     phone = models.CharField(max_length=10, blank=False)
     country_code = models.CharField(max_length=3, blank=False) 
+    
+    def __str__(self):
+        return self.fname+" " +self.lname
