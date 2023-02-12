@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-@api_view()
+@api_view() #by default api_view uses ['GET']
 def get_all_users(request):
     if request.method == 'GET':
         user = User.objects.all() #get all users
@@ -13,7 +13,19 @@ def get_all_users(request):
         return JsonResponse(serializer.data, safe= False) #return json
     else: 
         return Response({"message": "Something went wrong 🙁" })
-  
+    
+@api_view()
+def get_single_user(request, id):
+    if request.method == 'GET':
+        try:
+            user = User.objects.get(pk = id)
+        except User.DoesNotExist:
+            return Response(status= status.HTTP_404_NOT_FOUND)
+        
+        serializer = UserSerializer(user) #serialize 
+        return Response(serializer.data) #return json
+    else: 
+        return Response({"message": "Something went wrong 🙁" })
 
 @api_view(['POST'])
 def create_user(request):

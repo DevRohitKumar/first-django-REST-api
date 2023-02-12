@@ -20,5 +20,6 @@ from first_django_site import view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users', view.get_all_users ), #get all users
+    path('api/user/<int:id>', view.get_single_user ), #get single user by id
     path('api/create-user', view.create_user ), #create user
 ]
