@@ -19,5 +19,6 @@ from first_django_site import view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', view.get_all_users )
+    path('api/users', view.get_all_users ), #get all users
+    path('api/create-user', view.create_user ), #create user
 ]
