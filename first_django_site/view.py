@@ -36,3 +36,39 @@ def create_user(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response({"message": "Something is wrong ☹️"})
+    
+@api_view(['PUT'])
+def update_user(request, id):
+    if request.method == 'PUT':
+        try:
+            user = User.objects.get(pk = id)
+            serializer = UserSerializer(user, data= request.data) #serialize 
+        except User.DoesNotExist:
+            return Response(status= status.HTTP_404_NOT_FOUND)
+                
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data) #return json
+        else:
+            return Response({"message": serializer.errors ,
+                             "status": status.HTTP_404_NOT_FOUND })
+    else: 
+        return Response({"message": "Something went wrong 🙁" })
+    
+
+    
+
+
+
+
+
+
+
+
+    
+   
+'''
+Author 👨‍🔬: Rohit Kumar
+Email ✉️: contactdevrk@gmail.com
+Created 📆: 12-02-2023
+'''

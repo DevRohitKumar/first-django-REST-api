@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users', view.get_all_users ), #get all users
     path('api/user/<int:id>', view.get_single_user ), #get single user by id
-    path('api/create-user', view.create_user ), #create user
+    path('api/create', view.create_user ), #create user
+    path('api/update/<int:id>', view.update_user ), #update user with complete user data
+    
 ]
