@@ -55,8 +55,22 @@ def update_user(request, id):
     else: 
         return Response({"message": "Something went wrong 🙁" })
     
-
     
+@api_view(['DELETE'])
+def delete_user(request, id):
+    if request.method == 'DELETE':
+        try:
+            user = User.objects.get(pk = id)
+        except User.DoesNotExist:
+            return Response(status= status.HTTP_404_NOT_FOUND)
+                
+        if user:
+            user.delete()
+            return Response({"message": "User deleted successfully",
+                             "status": status.HTTP_204_NO_CONTENT }) 
+        else:
+            return Response({"message": "No such user exists" ,
+                             "status": status.HTTP_404_NOT_FOUND })
 
 
 
