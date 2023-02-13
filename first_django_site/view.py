@@ -56,7 +56,7 @@ def update_user(request, id):
         return Response({"message": "Something went wrong 🙁" })
     
 @api_view(['PATCH'])
-def update_user(request, id):
+def partial_update_user(request, id):
     if request.method == 'PATCH':
         try:
             user = User.objects.get(pk = id)

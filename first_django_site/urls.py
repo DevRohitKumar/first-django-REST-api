@@ -23,6 +23,6 @@ urlpatterns = [
     path('api/user/<int:id>', view.get_single_user ), #get single user by id
     path('api/create', view.create_user ), #create user
     path('api/update/<int:id>', view.update_user ), #update user with complete user data
-    path('api/patch-update/<int:id>', view.update_user ), #patch update user data
+    path('api/patch-update/<int:id>', view.partial_update_user ), #patch update user data
     path('api/delete/<int:id>', view.delete_user) # delete user
 ]
