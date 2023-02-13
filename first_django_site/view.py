@@ -55,6 +55,39 @@ def update_user(request, id):
     else: 
         return Response({"message": "Something went wrong 🙁" })
     
+@api_view(['PATCH'])
+def update_user(request, id):
+    if request.method == 'PATCH':
+        try:
+            user = User.objects.get(pk = id)
+            serializer = UserSerializer(user, data= request.data, partial = True)  
+            
+        except User.DoesNotExist:
+            return Response(status= status.HTTP_404_NOT_FOUND)
+        
+        
+        # print()
+        # print()
+        # print("USER IS : ", serializer.fields )
+        # print("LENGTH : ", type(serializer.fields))
+        # print()
+        # print()
+        
+        
+        # for key in range(serializer.fields):
+        #     # print(key)
+        #     print(serializer.fields[key])
+        #     print()
+        #     print()
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data) 
+        else:
+            return Response({"message": serializer.errors ,
+                             "status": status.HTTP_404_NOT_FOUND })
+    else: 
+        return Response({"message": "Something went wrong 🙁" })
     
 @api_view(['DELETE'])
 def delete_user(request, id):
